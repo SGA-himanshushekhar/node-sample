@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>Address book</title>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script type="text/javascript" src="/sha256.js"></script>
+        <script type="text/javascript" src="/request.js"></script>
+        <script type="text/javascript" src="/ui.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                refreshContactsList();
+                $("#new-contact-button").on("click", addNewContact);
+            });
+        </script>
+    </head>
+
+    <body>
+        <h1>Address book sample</h1>
+        <p>Welcome to Address book sample</p>
+        <form action="#">
+            <p>name:
+                <input required id="new-contact-name">
+            </p>
+            <p>email:
+                <input required id="new-contact-email">
+            </p>
+            <p>
+                <input type="button" value="Add" id="new-contact-button">
+            </p>
+        </form>
+        <table class="result">
+            <tr class="result-title">
+                <th>ID(click to edit view)</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th> </th>
+            </tr>
+        </table>
+    </body>
+</html>
