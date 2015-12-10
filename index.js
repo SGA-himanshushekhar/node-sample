@@ -62,6 +62,7 @@ function getContact(id) {
 }
 
 function createContact(req) {
+  // input validation
   if (typeof req.body.name !== "string" || typeof req.body.email !== "string") {
     return null;
   }
