@@ -70,7 +70,7 @@ function createContact(req) {
   // create a new contact
   var id = generateLocalContactID();
   var contact = {
-    id: id,
+    id: id.toString(),
     name: req.body.name,
     email: req.body.email
   };
@@ -146,7 +146,7 @@ app.get('/api/1/contacts/:id', function (req, res) {
   }
   
   res.json({
-    contacts : result
+    contact : result
   })
 });
 
