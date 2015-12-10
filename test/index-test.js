@@ -13,7 +13,7 @@ describe('create and get a contact', function () {
         request(index)
             .post("/api/1/contacts")
             .send(contact_data)
-            .expect(200)
+            .expect(201)
             .end(function (err, res) {
                 if (err) throw err;
                 id = res.body.id;
