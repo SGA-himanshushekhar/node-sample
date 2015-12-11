@@ -40,12 +40,30 @@ function requestGlobalContactID() {
     url: lambdaURL,
     json: true,
   };
-  return sync.await(request.get(opts, sync.defer()));
+  return sync.await(request.post(opts, sync.defer()));
 }
 
 function generateGlobalContactID() {
-  // TODO: Implement retry for requestGlobalContactID
+  var maxRetryCnt = 3,
+      retryCnt = 0;
   
+  var gid, res;
+  do {
+   res = requestGlobalContactID();
+   console.log(JSON.stringify(res));
+   
+   if (parseInt(res.statusCode) === 200) {
+     // request succeeded; break
+     gid = res.body.id;
+     break;
+   }
+   
+   // request failed; retry
+   retryCnt++;
+   console.log("retrying: " + retryCnt);
+  } while (retryCnt <= maxRetryCnt);
+  
+  return gid;
 }
 
 var contactID = 1;
@@ -68,8 +86,13 @@ function addContact(req) {
     return null;
   }
   
+  // request for a new global id
+  var id = generateGlobalContactID();
+  if (typeof id !== "string") {
+    return null;
+  }
+  
   // create a new contact
-  var id = generateLocalContactID();
   var contact = {
     id: id.toString(),
     name: req.body.name,
