@@ -5,7 +5,7 @@ var API_KEY_ID = 'APIKEY1';
 function calcHMAC(url, method, body, nonce, key) {
   var sign = new jsSHA('SHA-256', 'TEXT');
   sign.setHMACKey(key, 'TEXT');
-  sign.update(nonce + url + method.toUpperCase() + body);
+  sign.update(url + method.toUpperCase() + body + nonce);
   return sign.getHMAC('HEX');
 }
 
