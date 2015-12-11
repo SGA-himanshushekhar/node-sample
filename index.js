@@ -45,6 +45,7 @@ function requestGlobalContactID() {
 
 function generateGlobalContactID() {
   // TODO: Implement retry for requestGlobalContactID
+  
 }
 
 var contactID = 1;
@@ -61,7 +62,7 @@ function getContact(id) {
   return contacts[id];
 }
 
-function createContact(req) {
+function addContact(req) {
   // input validation
   if (typeof req.body.name !== "string" || typeof req.body.email !== "string") {
     return null;
@@ -151,7 +152,7 @@ app.get('/api/1/contacts/:id', function (req, res) {
 });
 
 app.post('/api/1/contacts', function (req, res) {
-  var contact = createContact(req);
+  var contact = addContact(req);
   
   if (!contact) {
     res.status(503).json({
